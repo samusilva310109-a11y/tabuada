@@ -11,6 +11,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class TelaTabuada extends Application {
@@ -127,6 +133,17 @@ public class TelaTabuada extends Application {
             String[] resultado = tabuada.calcularTabuada();
 
             listaTabuada.getItems().addAll(resultado);
+
+            //gravar os dados da tabuada em arquivo
+            Path arquivo = Path.of("C:\\Users\\25203710\\DS1T\\tabuada\\dados_tabuada.csv");
+
+            String dados = txfMultiplicando.getText() + ";" + txfMultiplicadorInicial.getText() + ";" + txfMultiplicadorFinal.getText() + ";" + LocalDateTime.now() + "\n";
+
+            try {
+                Files.writeString(arquivo, dados,  StandardOpenOption.APPEND);
+            }catch (IOException error){
+                System.out.println(error.getMessage());
+            }
         });
 
         /*Botão Limpar*/
