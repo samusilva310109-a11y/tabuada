@@ -3,9 +3,10 @@ package br.senai.sp.jandira.tabuada.model;
 import java.util.Scanner;
 
 public class Tabuada {
-    int multiplicando;
-    int multiplicadorInicial;
-    int multiplicadorFinal;
+    public int multiplicando;
+    public int multiplicadorInicial;
+    public int multiplicadorFinal;
+    String[] tabuada;
 
     public void receberDadosDoUsuario(){
         Scanner leitor = new Scanner(System.in);
@@ -22,28 +23,29 @@ public class Tabuada {
 
         leitor.close();
         System.out.println("RESULTADO");
-        validarDadosDoUsuario();
     }
-    public void validarDadosDoUsuario(){
+    public String[] calcularTabuada(){
         int apoio = 0;
 
         if (multiplicadorInicial > multiplicadorFinal){
             apoio = multiplicadorFinal;
             multiplicadorFinal = multiplicadorInicial;
             multiplicadorInicial = apoio;
-            calcularTabuada();
-        }else{
-            calcularTabuada();
-        }
-    }
-    public void calcularTabuada(){
-        int[] multiplicadores = new int[multiplicadorFinal];
 
-        while (multiplicadorInicial <= multiplicadores.length){
+        }
+
+        int tamanho = multiplicadorFinal - multiplicadorInicial + 1;
+        tabuada = new String[tamanho];
+
+        int i = 0;
+        while (tamanho > i){
             int resultado = multiplicando * multiplicadorInicial;
 
-            System.out.println(multiplicando + " X " + multiplicadorInicial + " = " + resultado);
+            tabuada[i] = multiplicando + " X " + multiplicadorInicial + " = " + resultado;
             multiplicadorInicial++;
+            i++;
         };
+
+        return tabuada;
     }
 }
